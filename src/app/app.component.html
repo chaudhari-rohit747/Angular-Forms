@@ -1,1 +1,67 @@
-<h2>This Is Advanced Angular Concepts</h2>
+<div class="container">
+    <h2>This Is Advanced Angular Concepts</h2>
+    <br>
+    <h3>This Is Lazy Loading Of The Module</h3>
+    <h3>Admin Page</h3>
+    <ul>
+        <li>
+            <a routerLink="admin/login">Log In</a> <br>
+        </li>
+        <li>
+            <a routerLink="admin/list">List</a>
+        </li>
+    </ul>
+    <h3>User Page</h3>
+    <ul>
+        <li>
+            <a routerLink="user/login">Log In</a> <br>
+        </li>
+        <li>
+            <a routerLink="user/list">List</a>
+        </li>
+    </ul>
+    <router-outlet></router-outlet>  
+</div>
+<!-- lazy loading of the components -->
+<div class="container">
+    <h3>This Is Lazy Loading Of The Components</h3>
+    <button (click)="loadabt()" class="m-1" >About Us</button>
+    <button (click)="loadcu()">Contact Us</button>
+</div>
+
+<!-- Template driven forms -->
+
+<div class="container mt-2">
+    <h3>This is template driven form</h3>
+        <form #userform="ngForm" (ngSubmit)="onSubmit(userform.value)" class="col col-lg-6">
+            <div class="mb-3">
+              <label for="exampleInputEmail1" class="form-label">Email address</label>
+              <input type="email" class="form-control"name='email' ngModel>
+              <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+            </div>
+            <div class="mb-3">
+              <label for="exampleInputPassword1" class="form-label">Password</label>
+              <input type="password" class="form-control" name="password" ngModel>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
+</div>
+<br>
+<!-- Reactive form validations -->
+
+<div class="container">
+    <h3>This Is Reactive Form</h3>
+    <form class="col col-lg-6" [formGroup]="loginForm" >
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label">Email address</label>
+          <input type="email" class="form-control" formControlName="email">
+          <span *ngIf="email?.invalid && email?.touched">Email Field Is Required</span>
+        </div>
+        <div class="mb-3">
+          <label for="exampleInputPassword1" class="form-label">Password</label>
+          <input type="password" class="form-control" formControlName="password" >
+          <span *ngIf="password?.invalid && password?.touched">Password Field Is Required</span>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+</div>
