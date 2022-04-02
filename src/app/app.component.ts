@@ -28,10 +28,17 @@ export class AppComponent {
   onSubmit(data:any){
     console.log(data)
   }
-  loginForm=new FormGroup({
-    email: new FormControl('',Validators.required),
-    password: new FormControl('',Validators.required)
+
+  // Reactive Form 
+  loginForm = new FormGroup({
+    email1: new FormControl('',Validators.required),
+    password1: new FormControl('',Validators.required)
   })
-   get email() {return this.loginForm.get('email')}
-   get password() { return this.loginForm.get('password')}
+   get email1() {return this.loginForm.get('email1')}
+   get password1() { return this.loginForm.get('password1')}
+
+   Submit(){
+     console.log(this.loginForm.value)
+   }
+   
 }

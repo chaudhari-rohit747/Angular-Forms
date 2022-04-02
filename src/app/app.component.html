@@ -1,4 +1,7 @@
 <div class="container">
+    <span>advanceangular app is running!</span>
+</div>
+<div class="container">
     <h2>This Is Advanced Angular Concepts</h2>
     <br>
     <h3>This Is Lazy Loading Of The Module</h3>
@@ -30,38 +33,47 @@
 </div>
 
 <!-- Template driven forms -->
+<!-- And It's Validations -->
 
 <div class="container mt-2">
-    <h3>This is template driven form</h3>
+    <h3>This is template driven form With Validations</h3>
         <form #userform="ngForm" (ngSubmit)="onSubmit(userform.value)" class="col col-lg-6">
             <div class="mb-3">
               <label for="exampleInputEmail1" class="form-label">Email address</label>
-              <input type="email" class="form-control"name='email' ngModel>
-              <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+              <input type="email" class="form-control" name='email' email ngModel required #email="ngModel">
+              <span *ngIf="email?.invalid && email?.touched" class="error">Email Is not valid</span>
             </div>
             <div class="mb-3">
               <label for="exampleInputPassword1" class="form-label">Password</label>
-              <input type="password" class="form-control" name="password" ngModel>
+              <input type="password" class="form-control" name="password" ngModel
+              required #password="ngModel" pattern="[a-zA-Z0-9@]*">
+              <span *ngIf="password?.invalid && password?.touched" class="error">Password Field Is Required</span>
             </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">Mobile Number</label>
+                <input type="text" class="form-control" name="number" ngModel
+                minlength="8" maxlength="12" pattern="[0-9]*" required #number="ngModel">
+                <span *ngIf="number?.invalid && number?.touched" class="error">Mobile Number Is Not Valid</span>
+              </div>
+            <button type="submit" [disabled]="userform.invalid" class="btn btn-primary">Submit</button>
           </form>
 </div>
 <br>
 <!-- Reactive form validations -->
 
 <div class="container">
-    <h3>This Is Reactive Form</h3>
-    <form class="col col-lg-6" [formGroup]="loginForm" >
+    <h3>This Is Reactive Form With Validations</h3>
+    <form class="col col-lg-6" [formGroup]="loginForm" (ngSubmit)="Submit()" >
         <div class="mb-3">
           <label for="exampleInputEmail1" class="form-label">Email address</label>
-          <input type="email" class="form-control" formControlName="email">
-          <span *ngIf="email?.invalid && email?.touched">Email Field Is Required</span>
+          <input type="email" class="form-control" formControlName="email1" email>
+          <span *ngIf="email1?.invalid && email1?.touched" class="error">Email Is Not Valid</span>
         </div>
         <div class="mb-3">
           <label for="exampleInputPassword1" class="form-label">Password</label>
-          <input type="password" class="form-control" formControlName="password" >
-          <span *ngIf="password?.invalid && password?.touched">Password Field Is Required</span>
+          <input type="password" class="form-control" formControlName="password1" password >
+          <span *ngIf="password1?.invalid && password1?.touched" class="error">Password Field Is Required</span>
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" [disabled]="loginForm.invalid" class="btn btn-primary">Submit</button>
       </form>
 </div>
